@@ -5,161 +5,516 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sui CLI Setup Guide</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Calibri', 'Arial', sans-serif;
-            line-height: 1.6;
-            max-width: 8.5in;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.7;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 1in;
-            background: white;
-            color: #000;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #2d3748;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 3rem;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         h1 {
-            font-size: 24pt;
-            font-weight: bold;
-            color: #2E75B5;
-            margin-top: 0;
-            margin-bottom: 12pt;
-            border-bottom: 2px solid #2E75B5;
-            padding-bottom: 6pt;
+            font-size: 2.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 2rem 0 1.5rem 0;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 1rem;
         }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
         h2 {
-            font-size: 18pt;
-            font-weight: bold;
-            color: #2E75B5;
-            margin-top: 18pt;
-            margin-bottom: 10pt;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4a5568;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
+
+        h2::before {
+            content: '';
+            width: 6px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+
         h3 {
-            font-size: 14pt;
-            font-weight: bold;
-            color: #4472C4;
-            margin-top: 14pt;
-            margin-bottom: 8pt;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #5a67d8;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
+
         h4 {
-            font-size: 12pt;
-            font-weight: bold;
-            color: #4472C4;
-            margin-top: 12pt;
-            margin-bottom: 6pt;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
         }
         p {
-            margin: 6pt 0;
-            text-align: justify;
+            margin: 1rem 0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #4a5568;
         }
+
         ul, ol {
-            margin: 6pt 0;
-            padding-left: 30pt;
+            margin: 1.25rem 0;
+            padding-left: 2rem;
         }
+
         li {
-            margin: 3pt 0;
+            margin: 0.75rem 0;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 0.5rem;
         }
         code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background: #F2F2F2;
-            padding: 2pt 4pt;
-            border: 1px solid #D4D4D4;
-            border-radius: 3px;
-            font-size: 10pt;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5a67d8;
+            font-weight: 500;
         }
+
         pre {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background: #F8F8F8;
-            padding: 12pt;
-            border: 1px solid #D4D4D4;
-            border-left: 4px solid #2E75B5;
+            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border: none;
+            border-left: 4px solid #667eea;
             overflow-x: auto;
-            margin: 12pt 0;
-            border-radius: 4px;
-            font-size: 10pt;
-            line-height: 1.4;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        pre:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-weight: normal;
         }
         table {
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             width: 100%;
-            margin: 12pt 0;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
+
         th, td {
-            border: 1px solid #D4D4D4;
-            padding: 8pt;
+            padding: 1rem 1.25rem;
             text-align: left;
+            border: none;
         }
+
         th {
-            background: #2E75B5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
-        tr:nth-child(even) {
-            background: #F2F2F2;
+
+        tbody tr {
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        tbody tr:hover {
+            background: #edf2f7;
+            transform: scale(1.01);
+        }
+
+        td {
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
         }
         .warning {
-            background: #FFF4CE;
-            border-left: 4px solid #FFB900;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+            animation: slideIn 0.4s ease;
         }
+
+        .warning::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+
         .note {
-            background: #E7F3FF;
-            border-left: 4px solid #2E75B5;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 5px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            animation: slideIn 0.4s ease;
         }
+
+        .note::before {
+            content: 'ℹ️';
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+
         .danger {
-            background: #FFE6E6;
-            border-left: 4px solid #D83B01;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #ef4444;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+            animation: slideIn 0.4s ease;
+        }
+
+        .danger::before {
+            content: '🚨';
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         .menu {
-            background: #F8F8F8;
-            border: 2px solid #2E75B5;
-            padding: 16pt;
-            margin: 16pt 0;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #cbd5e1;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
+
         .menu h2 {
             margin-top: 0;
-            font-size: 16pt;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            color: #334155;
         }
+
+        .menu h2::before {
+            display: none;
+        }
+
         .menu ul {
             list-style: none;
             padding-left: 0;
         }
+
         .menu li {
-            margin: 8pt 0;
-            padding-left: 20pt;
+            margin: 1rem 0;
+            padding: 1rem;
+            padding-left: 3rem;
             position: relative;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .menu li:before {
+
+        .menu li:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+        }
+
+        .menu li::before {
             content: "📄";
             position: absolute;
-            left: 0;
+            left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .menu li a strong {
+            color: #5a67d8;
         }
         .button {
-            background: #2E75B5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8pt 16pt;
+            padding: 0.75rem 1.75rem;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 10px;
             display: inline-block;
-            margin: 6pt 0;
+            margin: 1rem 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
         hr {
             border: none;
-            border-top: 1px solid #D4D4D4;
-            margin: 18pt 0;
+            border-top: 2px solid #e2e8f0;
+            margin: 3rem 0;
+            position: relative;
         }
+
+        hr::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
         a {
-            color: #2E75B5;
-            text-decoration: underline;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
         }
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        a:hover {
+            color: #764ba2;
+        }
+
         .emoji {
-            font-size: 14pt;
+            font-size: 1.5rem;
+        }
+
+        strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Back to top button styling */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            h4 {
+                font-size: 1.1rem;
+            }
+
+            p, li {
+                font-size: 1rem;
+            }
+
+            .menu {
+                padding: 1.25rem;
+            }
+
+            .menu li {
+                padding: 0.75rem;
+                padding-left: 2.5rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+
+            pre {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.35rem;
+            }
+
+            .menu li {
+                padding: 0.6rem;
+                padding-left: 2rem;
+                font-size: 0.95rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
     <h1>Sui Development Setup Guide</h1>
     
     <div class="menu">
@@ -645,11 +1000,98 @@ npm install</pre>
     
     <hr>
     
-    <div style="text-align: center; margin-top: 36pt; padding: 24pt; background: #F8F8F8; border-radius: 8px;">
-        <h2 style="color: #2E75B5; margin-bottom: 12pt;">🎉 Congratulations!</h2>
-        <p style="font-size: 12pt; margin: 0;">You've successfully set up your Sui development environment.</p>
-        <p style="font-size: 12pt; margin: 6pt 0 0 0;">You're now ready to start building on Sui!</p>
+    <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 16px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.15);">
+        <h2 style="color: #16a34a; margin-bottom: 1rem; background: none; -webkit-text-fill-color: #16a34a;">🎉 Congratulations!</h2>
+        <p style="font-size: 1.15rem; margin: 0; color: #15803d;">You've successfully set up your Sui development environment.</p>
+        <p style="font-size: 1.15rem; margin: 1rem 0 0 0; color: #15803d;">You're now ready to start building on Sui!</p>
     </div>
-    
+
+    </div> <!-- End of container -->
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop" title="Back to top">
+        ↑
+    </div>
+
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add copy button to code blocks
+        document.querySelectorAll('pre').forEach((pre) => {
+            const button = document.createElement('button');
+            button.innerText = '📋 Copy';
+            button.style.cssText = `
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 0.4rem 0.8rem;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                transition: all 0.2s ease;
+            `;
+
+            button.addEventListener('mouseenter', () => {
+                button.style.background = 'rgba(255, 255, 255, 0.2)';
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+            });
+
+            button.addEventListener('click', () => {
+                const code = pre.innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerText = '✓ Copied!';
+                    setTimeout(() => {
+                        button.innerText = '📋 Copy';
+                    }, 2000);
+                });
+            });
+
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+        });
+
+        // Add smooth scroll animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('h2, h3, .warning, .note, .danger, table').forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

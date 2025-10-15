@@ -14,19 +14,51 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             line-height: 1.7;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
             color: #2d3748;
             min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 2px solid #e2e8f0;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
         .container {
+            margin-left: 280px;
+            flex: 1;
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             padding: 3rem;
+            max-width: 1200px;
             animation: fadeIn 0.6s ease-in;
         }
 
@@ -43,11 +75,8 @@
         h1 {
             font-size: 2.75rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 2rem 0 1.5rem 0;
+            color: #1e293b;
+            margin: 0 0 1.5rem 0;
             letter-spacing: -0.5px;
             position: relative;
             padding-bottom: 1rem;
@@ -60,7 +89,7 @@
             left: 0;
             width: 80px;
             height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3b82f6;
             border-radius: 2px;
         }
 
@@ -79,14 +108,14 @@
             content: '';
             width: 6px;
             height: 32px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3b82f6;
             border-radius: 3px;
         }
 
         h3 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #5a67d8;
+            color: #1e40af;
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
@@ -94,7 +123,7 @@
         h4 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #667eea;
+            color: #2563eb;
             margin-top: 1.5rem;
             margin-bottom: 0.75rem;
         }
@@ -122,12 +151,12 @@
         }
         code {
             font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            background: #f1f5f9;
             padding: 0.25rem 0.5rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             border-radius: 6px;
             font-size: 0.9rem;
-            color: #5a67d8;
+            color: #1e40af;
             font-weight: 500;
         }
 
@@ -137,13 +166,13 @@
             color: #e2e8f0;
             padding: 1.5rem;
             border: none;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #3b82f6;
             overflow-x: auto;
             margin: 1.5rem 0;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 0.95rem;
             line-height: 1.6;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -176,10 +205,10 @@
         }
 
         th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3b82f6;
             color: white;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
@@ -207,12 +236,12 @@
             border-bottom: none;
         }
         .warning {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: #fef3c7;
             border-left: 5px solid #f59e0b;
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
             animation: slideIn 0.4s ease;
         }
 
@@ -223,12 +252,12 @@
         }
 
         .note {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            background: #dbeafe;
             border-left: 5px solid #3b82f6;
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
             animation: slideIn 0.4s ease;
         }
 
@@ -239,12 +268,12 @@
         }
 
         .danger {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            background: #fee2e2;
             border-left: 5px solid #ef4444;
             padding: 1.5rem;
             margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
             animation: slideIn 0.4s ease;
         }
 
@@ -264,125 +293,97 @@
                 transform: translateX(0);
             }
         }
-        .menu {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px solid #cbd5e1;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        }
-
-        .menu h2 {
-            margin-top: 0;
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 1.5rem;
-            font-size: 1.75rem;
-            color: #334155;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
-        .menu h2::before {
-            display: none;
+        .nav-section {
+            margin-bottom: 2rem;
         }
 
-        .menu ul {
+        .nav-section-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-list {
             list-style: none;
             padding-left: 0;
+            margin: 0;
         }
 
-        .menu li {
-            margin: 1rem 0;
-            padding: 1rem;
-            padding-left: 3rem;
-            position: relative;
-            background: white;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        .nav-list li {
+            margin: 0;
         }
 
-        .menu li:hover {
-            transform: translateX(8px);
-            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
-        }
-
-        .menu li::before {
-            content: "📄";
-            position: absolute;
-            left: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .menu li a {
+        .nav-list a {
+            display: block;
+            padding: 0.6rem 0.75rem;
+            color: #475569;
             text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
         }
 
-        .menu li a strong {
-            color: #5a67d8;
+        .nav-list a:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .nav-list a.active {
+            background: #eff6ff;
+            color: #3b82f6;
+            font-weight: 600;
+            border-left-color: #3b82f6;
         }
         .button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3b82f6;
             color: white;
             padding: 0.75rem 1.75rem;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 8px;
             display: inline-block;
             margin: 1rem 0;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
         }
 
         .button:hover {
+            background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         hr {
             border: none;
             border-top: 2px solid #e2e8f0;
             margin: 3rem 0;
-            position: relative;
-        }
-
-        hr::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
         }
 
         a {
-            color: #667eea;
+            color: #3b82f6;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
-            position: relative;
-        }
-
-        a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-
-        a:hover::after {
-            width: 100%;
         }
 
         a:hover {
-            color: #764ba2;
+            color: #2563eb;
+            text-decoration: underline;
         }
 
         .emoji {
@@ -404,7 +405,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #3b82f6;
             color: white;
             width: 50px;
             height: 50px;
@@ -413,11 +414,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
+            font-size: 1.5rem;
         }
 
         .back-to-top.visible {
@@ -426,23 +428,75 @@
         }
 
         .back-to-top:hover {
+            background: #2563eb;
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 200;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: #2563eb;
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
             }
 
             .container {
-                padding: 1.5rem;
-                border-radius: 12px;
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            body.menu-open .sidebar {
+                transform: translateX(0);
+            }
+
+            body.menu-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
             }
 
             h1 {
                 font-size: 2rem;
+                margin-top: 3rem;
             }
 
             h2 {
@@ -459,15 +513,6 @@
 
             p, li {
                 font-size: 1rem;
-            }
-
-            .menu {
-                padding: 1.25rem;
-            }
-
-            .menu li {
-                padding: 0.75rem;
-                padding-left: 2.5rem;
             }
 
             table {
@@ -500,12 +545,6 @@
                 font-size: 1.35rem;
             }
 
-            .menu li {
-                padding: 0.6rem;
-                padding-left: 2rem;
-                font-size: 0.95rem;
-            }
-
             th, td {
                 padding: 0.5rem;
                 font-size: 0.85rem;
@@ -514,19 +553,44 @@
     </style>
 </head>
 <body>
+    <!-- Mobile menu toggle -->
+    <button class="mobile-menu-toggle" id="menuToggle">
+        ☰ Menu
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📚 Sui Setup Guide</div>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Main Topics</div>
+            <ul class="nav-list">
+                <li><a href="#cli-setup">Sui CLI Setup</a></li>
+                <li><a href="#wallet-setup">Wallet Setup</a></li>
+                <li><a href="#testnet-tokens">Get Test Tokens</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Operating Systems</div>
+            <ul class="nav-list">
+                <li><a href="#linux">Linux Setup</a></li>
+                <li><a href="#macos">macOS Setup</a></li>
+                <li><a href="#windows">Windows Setup</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Additional Resources</div>
+            <ul class="nav-list">
+                <li><a href="#binaries">Installing Binaries</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
     <div class="container">
     <h1>Sui Development Setup Guide</h1>
-    
-    <div class="menu">
-        <h2>📋 Table of Contents</h2>
-        <ul>
-            <li><a href="#cli-setup"><strong>Sui CLI Setup</strong></a> - Install Sui CLI on your local machine</li>
-            <li><a href="#wallet-setup"><strong>Setting Up the Sui Wallet</strong></a> - Install and configure your Sui browser wallet</li>
-            <li><a href="#testnet-tokens"><strong>How to Request SUI Testnet & Devnet Tokens</strong></a> - Get free test tokens for development</li>
-        </ul>
-    </div>
-    
-    <hr style="border-top: 3px solid #2E75B5;">
     
     <h1 id="cli-setup">Sui CLI Setup</h1>
     
@@ -1000,8 +1064,8 @@ npm install</pre>
     
     <hr>
     
-    <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 16px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.15);">
-        <h2 style="color: #16a34a; margin-bottom: 1rem; background: none; -webkit-text-fill-color: #16a34a;">🎉 Congratulations!</h2>
+    <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: #d1fae5; border-radius: 12px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1); border: 2px solid #86efac;">
+        <h2 style="color: #16a34a; margin-bottom: 1rem;">🎉 Congratulations!</h2>
         <p style="font-size: 1.15rem; margin: 0; color: #15803d;">You've successfully set up your Sui development environment.</p>
         <p style="font-size: 1.15rem; margin: 1rem 0 0 0; color: #15803d;">You're now ready to start building on Sui!</p>
     </div>
@@ -1014,6 +1078,32 @@ npm install</pre>
     </div>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            document.body.classList.toggle('menu-open');
+            sidebar.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                document.body.classList.remove('menu-open');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-list a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('menu-open');
+                sidebar.classList.remove('active');
+            });
+        });
+
         // Back to top button functionality
         const backToTopButton = document.getElementById('backToTop');
 
@@ -1031,6 +1121,31 @@ npm install</pre>
                 behavior: 'smooth'
             });
         });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('h1[id], h2[id]');
+        const navLinksAll = document.querySelectorAll('.nav-list a');
+
+        function highlightActiveSection() {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksAll.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
 
         // Add copy button to code blocks
         document.querySelectorAll('pre').forEach((pre) => {

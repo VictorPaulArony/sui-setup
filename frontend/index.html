@@ -13,11 +13,11 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            line-height: 1.7;
+            line-height: 1.8;
             margin: 0;
             padding: 0;
-            background: #f8f9fa;
-            color: #2d3748;
+            background: #f5f7fa;
+            color: #334155;
             min-height: 100vh;
             display: flex;
         }
@@ -26,13 +26,13 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 280px;
+            width: 300px;
             height: 100vh;
             background: #ffffff;
-            border-right: 2px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
             overflow-y: auto;
-            padding: 2rem 1.5rem;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            padding: 2.5rem 2rem;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.03);
             z-index: 100;
         }
 
@@ -54,12 +54,13 @@
         }
 
         .container {
-            margin-left: 280px;
+            margin-left: 300px;
             flex: 1;
             background: #ffffff;
-            padding: 3rem;
-            max-width: 1200px;
+            padding: 4rem 5rem;
+            max-width: 1400px;
             animation: fadeIn 0.6s ease-in;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.02);
         }
 
         @keyframes fadeIn {
@@ -73,13 +74,14 @@
             }
         }
         h1 {
-            font-size: 2.75rem;
+            font-size: 3rem;
             font-weight: 800;
-            color: #1e293b;
-            margin: 0 0 1.5rem 0;
-            letter-spacing: -0.5px;
+            color: #0f172a;
+            margin: 0 0 2rem 0;
+            letter-spacing: -1px;
             position: relative;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         h1::after {
@@ -87,98 +89,113 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 80px;
-            height: 4px;
-            background: #3b82f6;
-            border-radius: 2px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #4a5568;
-            margin-top: 3rem;
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        h2::before {
-            content: '';
-            width: 6px;
-            height: 32px;
+            width: 100px;
+            height: 5px;
             background: #3b82f6;
             border-radius: 3px;
         }
 
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            line-height: 1.3;
+        }
+
+        h2::before {
+            content: '';
+            width: 8px;
+            height: 36px;
+            background: #3b82f6;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 600;
-            color: #1e40af;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            color: #334155;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.4;
         }
 
         h4 {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 600;
-            color: #2563eb;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+            color: #475569;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
         }
         p {
-            margin: 1rem 0;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #4a5568;
+            margin: 1.5rem 0;
+            font-size: 1.0625rem;
+            line-height: 1.9;
+            color: #475569;
+            max-width: 75ch;
         }
 
         ul, ol {
-            margin: 1.25rem 0;
-            padding-left: 2rem;
+            margin: 1.5rem 0;
+            padding-left: 2.5rem;
         }
 
         li {
-            margin: 0.75rem 0;
-            color: #4a5568;
+            margin: 1rem 0;
+            color: #475569;
             line-height: 1.8;
+            font-size: 1.0625rem;
         }
 
         ul li {
             position: relative;
-            padding-left: 0.5rem;
+            padding-left: 0.75rem;
+        }
+
+        ul li::marker {
+            color: #3b82f6;
+            font-size: 1.2em;
+        }
+
+        ol li::marker {
+            color: #3b82f6;
+            font-weight: 600;
         }
         code {
-            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
             background: #f1f5f9;
-            padding: 0.25rem 0.5rem;
+            padding: 0.3rem 0.6rem;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.9375rem;
             color: #1e40af;
             font-weight: 500;
         }
 
         pre {
-            font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
-            background: #1e293b;
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: #0f172a;
             color: #e2e8f0;
-            padding: 1.5rem;
+            padding: 2rem;
             border: none;
-            border-left: 4px solid #3b82f6;
+            border-left: 5px solid #3b82f6;
             overflow-x: auto;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin: 2rem 0;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
         }
 
         pre:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
 
         pre code {
@@ -192,14 +209,15 @@
             border-collapse: separate;
             border-spacing: 0;
             width: 100%;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
         }
 
         th, td {
-            padding: 1rem 1.25rem;
+            padding: 1.25rem 1.5rem;
             text-align: left;
             border: none;
         }
@@ -208,8 +226,8 @@
             background: #3b82f6;
             color: white;
             font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
+            font-size: 0.9375rem;
+            letter-spacing: 0.3px;
             text-transform: uppercase;
         }
 
@@ -219,68 +237,82 @@
         }
 
         tbody tr:nth-child(even) {
-            background: #f7fafc;
+            background: #f8fafc;
         }
 
         tbody tr:hover {
-            background: #edf2f7;
-            transform: scale(1.01);
+            background: #f1f5f9;
         }
 
         td {
-            color: #4a5568;
+            color: #475569;
             border-bottom: 1px solid #e2e8f0;
+            font-size: 1rem;
         }
 
         tbody tr:last-child td {
             border-bottom: none;
         }
         .warning {
-            background: #fef3c7;
-            border-left: 5px solid #f59e0b;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+            background: #fffbeb;
+            border-left: 6px solid #f59e0b;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
             animation: slideIn 0.4s ease;
+            border: 1px solid #fde68a;
         }
 
         .warning::before {
             content: '⚠️';
-            font-size: 1.5rem;
-            margin-right: 0.75rem;
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .note {
-            background: #dbeafe;
-            border-left: 5px solid #3b82f6;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+            background: #eff6ff;
+            border-left: 6px solid #3b82f6;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
             animation: slideIn 0.4s ease;
+            border: 1px solid #bfdbfe;
         }
 
         .note::before {
             content: 'ℹ️';
-            font-size: 1.5rem;
-            margin-right: 0.75rem;
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .danger {
-            background: #fee2e2;
-            border-left: 5px solid #ef4444;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+            background: #fef2f2;
+            border-left: 6px solid #ef4444;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.08);
             animation: slideIn 0.4s ease;
+            border: 1px solid #fecaca;
         }
 
         .danger::before {
             content: '🚨';
-            font-size: 1.5rem;
-            margin-right: 0.75rem;
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .warning strong, .note strong, .danger strong {
+            font-weight: 700;
+            font-size: 1.0625rem;
         }
 
         @keyframes slideIn {
@@ -294,25 +326,27 @@
             }
         }
         .sidebar-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e2e8f0;
+            font-size: 1.625rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 3px solid #e2e8f0;
+            letter-spacing: -0.3px;
         }
 
         .nav-section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .nav-section-title {
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.8125rem;
+            font-weight: 700;
             color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.75rem;
+            letter-spacing: 0.8px;
+            margin-bottom: 1rem;
+            padding-left: 0.75rem;
         }
 
         .nav-list {
@@ -322,25 +356,42 @@
         }
 
         .nav-list li {
-            margin: 0;
+            margin: 0.25rem 0;
         }
 
         .nav-list a {
-            display: block;
-            padding: 0.6rem 0.75rem;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
             color: #475569;
             text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            font-size: 0.9375rem;
             border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .nav-list a::before {
+            content: '→';
+            margin-right: 0.75rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.25s ease;
+            color: #3b82f6;
+            font-weight: 700;
         }
 
         .nav-list a:hover {
             background: #f1f5f9;
             color: #3b82f6;
             border-left-color: #3b82f6;
-            padding-left: 1rem;
+            padding-left: 1.25rem;
+        }
+
+        .nav-list a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .nav-list a.active {
@@ -348,6 +399,12 @@
             color: #3b82f6;
             font-weight: 600;
             border-left-color: #3b82f6;
+            padding-left: 1.25rem;
+        }
+
+        .nav-list a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         .button {
             background: #3b82f6;
@@ -371,7 +428,7 @@
         hr {
             border: none;
             border-top: 2px solid #e2e8f0;
-            margin: 3rem 0;
+            margin: 4rem 0;
         }
 
         a {
@@ -379,11 +436,22 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         a:hover {
             color: #2563eb;
+        }
+
+        .container a:not(.nav-list a) {
             text-decoration: underline;
+            text-decoration-color: #93c5fd;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+
+        .container a:not(.nav-list a):hover {
+            text-decoration-color: #3b82f6;
         }
 
         .emoji {
@@ -391,8 +459,8 @@
         }
 
         strong {
-            color: #2d3748;
-            font-weight: 600;
+            color: #1e293b;
+            font-weight: 700;
         }
 
         /* Smooth scroll behavior */
@@ -403,23 +471,24 @@
         /* Back to top button styling */
         .back-to-top {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 2.5rem;
+            right: 2.5rem;
             background: #3b82f6;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
+            border: 3px solid white;
         }
 
         .back-to-top.visible {
@@ -429,35 +498,47 @@
 
         .back-to-top:hover {
             background: #2563eb;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.35);
         }
 
         /* Mobile menu toggle */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
-            top: 1rem;
-            left: 1rem;
+            top: 1.5rem;
+            left: 1.5rem;
             z-index: 200;
             background: #3b82f6;
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 0.75rem;
+            border-radius: 10px;
+            padding: 0.875rem 1.25rem;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all 0.3s ease;
         }
 
         .mobile-menu-toggle:hover {
             background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 4rem 3rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 8px 0 32px rgba(0,0,0,0.1);
             }
 
             .sidebar.active {
@@ -466,7 +547,7 @@
 
             .container {
                 margin-left: 0;
-                padding: 2rem 1.5rem;
+                padding: 3rem 2.5rem;
             }
 
             .mobile-menu-toggle {
@@ -484,31 +565,33 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.6);
                 z-index: 99;
+                backdrop-filter: blur(4px);
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 1.5rem 1rem;
+                padding: 2.5rem 2rem;
             }
 
             h1 {
-                font-size: 2rem;
-                margin-top: 3rem;
+                font-size: 2.25rem;
+                margin-top: 4rem;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.875rem;
+                margin-top: 3rem;
             }
 
             h3 {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
             }
 
             h4 {
-                font-size: 1.1rem;
+                font-size: 1.25rem;
             }
 
             p, li {
@@ -520,34 +603,46 @@
             }
 
             th, td {
-                padding: 0.75rem;
-            }
-
-            pre {
-                font-size: 0.85rem;
                 padding: 1rem;
             }
 
+            pre {
+                font-size: 0.875rem;
+                padding: 1.5rem;
+            }
+
             .back-to-top {
-                bottom: 1rem;
-                right: 1rem;
-                width: 45px;
-                height: 45px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 48px;
+                height: 48px;
             }
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+
             h1 {
-                font-size: 1.75rem;
+                font-size: 1.875rem;
             }
 
             h2 {
-                font-size: 1.35rem;
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
             }
 
             th, td {
-                padding: 0.5rem;
-                font-size: 0.85rem;
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            pre {
+                padding: 1.25rem;
             }
         }
     </style>
@@ -1064,10 +1159,11 @@ npm install</pre>
     
     <hr>
     
-    <div style="text-align: center; margin-top: 3rem; padding: 2.5rem; background: #d1fae5; border-radius: 12px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1); border: 2px solid #86efac;">
-        <h2 style="color: #16a34a; margin-bottom: 1rem;">🎉 Congratulations!</h2>
-        <p style="font-size: 1.15rem; margin: 0; color: #15803d;">You've successfully set up your Sui development environment.</p>
-        <p style="font-size: 1.15rem; margin: 1rem 0 0 0; color: #15803d;">You're now ready to start building on Sui!</p>
+    <div style="text-align: center; margin-top: 5rem; padding: 3rem; background: #ecfdf5; border-radius: 16px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12); border: 2px solid #a7f3d0;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+        <h2 style="color: #059669; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 700;">Congratulations!</h2>
+        <p style="font-size: 1.125rem; margin: 0 auto 1rem auto; color: #047857; max-width: 600px; line-height: 1.8;">You've successfully set up your Sui development environment.</p>
+        <p style="font-size: 1.125rem; margin: 0 auto; color: #047857; max-width: 600px; line-height: 1.8; font-weight: 600;">You're now ready to start building on Sui!</p>
     </div>
 
     </div> <!-- End of container -->

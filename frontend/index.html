@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sui CLI Setup Guide</title>
+    <style>
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+            color: #000;
+        }
+        h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2E75B5;
+            margin-top: 0;
+            margin-bottom: 12pt;
+            border-bottom: 2px solid #2E75B5;
+            padding-bottom: 6pt;
+        }
+        h2 {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2E75B5;
+            margin-top: 18pt;
+            margin-bottom: 10pt;
+        }
+        h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4472C4;
+            margin-top: 14pt;
+            margin-bottom: 8pt;
+        }
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #4472C4;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+        p {
+            margin: 6pt 0;
+            text-align: justify;
+        }
+        ul, ol {
+            margin: 6pt 0;
+            padding-left: 30pt;
+        }
+        li {
+            margin: 3pt 0;
+        }
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #F2F2F2;
+            padding: 2pt 4pt;
+            border: 1px solid #D4D4D4;
+            border-radius: 3px;
+            font-size: 10pt;
+        }
+        pre {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #F8F8F8;
+            padding: 12pt;
+            border: 1px solid #D4D4D4;
+            border-left: 4px solid #2E75B5;
+            overflow-x: auto;
+            margin: 12pt 0;
+            border-radius: 4px;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12pt 0;
+        }
+        th, td {
+            border: 1px solid #D4D4D4;
+            padding: 8pt;
+            text-align: left;
+        }
+        th {
+            background: #2E75B5;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background: #F2F2F2;
+        }
+        .warning {
+            background: #FFF4CE;
+            border-left: 4px solid #FFB900;
+            padding: 12pt;
+            margin: 12pt 0;
+        }
+        .note {
+            background: #E7F3FF;
+            border-left: 4px solid #2E75B5;
+            padding: 12pt;
+            margin: 12pt 0;
+        }
+        .danger {
+            background: #FFE6E6;
+            border-left: 4px solid #D83B01;
+            padding: 12pt;
+            margin: 12pt 0;
+        }
+        .menu {
+            background: #F8F8F8;
+            border: 2px solid #2E75B5;
+            padding: 16pt;
+            margin: 16pt 0;
+            border-radius: 6px;
+        }
+        .menu h2 {
+            margin-top: 0;
+            font-size: 16pt;
+        }
+        .menu ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .menu li {
+            margin: 8pt 0;
+            padding-left: 20pt;
+            position: relative;
+        }
+        .menu li:before {
+            content: "📄";
+            position: absolute;
+            left: 0;
+        }
+        .button {
+            background: #2E75B5;
+            color: white;
+            padding: 8pt 16pt;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 6pt 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #D4D4D4;
+            margin: 18pt 0;
+        }
+        a {
+            color: #2E75B5;
+            text-decoration: underline;
+        }
+        .emoji {
+            font-size: 14pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sui Development Setup Guide</h1>
+    
+    <div class="menu">
+        <h2>📋 Table of Contents</h2>
+        <ul>
+            <li><a href="#cli-setup"><strong>Sui CLI Setup</strong></a> - Install Sui CLI on your local machine</li>
+            <li><a href="#wallet-setup"><strong>Setting Up the Sui Wallet</strong></a> - Install and configure your Sui browser wallet</li>
+            <li><a href="#testnet-tokens"><strong>How to Request SUI Testnet & Devnet Tokens</strong></a> - Get free test tokens for development</li>
+        </ul>
+    </div>
+    
+    <hr style="border-top: 3px solid #2E75B5;">
+    
+    <h1 id="cli-setup">Sui CLI Setup</h1>
+    
+    <p>Before we can install Sui to our local machine, we first need to ensure that certain prerequisites have been installed on our machine. Sui supports the following operating systems:</p>
+    
+    <ul>
+        <li>Linux - Ubuntu version 20.04 (Jammy Jellfish)</li>
+        <li>macOS - macOS Monterey</li>
+        <li>Microsoft Windows - Windows 10, 11</li>
+    </ul>
+    
+    <div class="warning">
+        <strong>Disclaimer:</strong> Installing SUI process is a long process which can take up to 2 hours depending on your internet speed and reliability. Please be patient and follow the instructions carefully. Also ensure you have at least <strong>6GB</strong> of storage free on your machine.
+    </div>
+    
+    <p>If you find the process is too much you can go ahead and set it up on a virtual environment like Github Codespaces or Gitpod. This will just act as a bandaid solution as you will require to reinstall the sui binaries on every instance which is not sustainable long term. However it is a viable option if you struggle too much installing sui cli locally, especially if you are on a low-end machine, on windows or just have no space to spare.</p>
+    
+    <p>Jump to the step based on the OS that your machine is running.</p>
+    
+    <p><strong>Click below to go directly to the setup guide for your operating system:</strong></p>
+    <ul>
+        <li><a href="#linux">Linux Setup Guide</a></li>
+        <li><a href="#macos">Mac Setup Guide</a></li>
+        <li><a href="#windows">Windows Setup Guide</a></li>
+    </ul>
+    
+    <p>After you're done downloading the required prerequisites for your OS, continue to Step 5, where we'll download the Sui binaries (i.e. actually installing Sui on our machine).</p>
+    
+    <hr>
+    
+    <h2 id="linux">Linux Setup</h2>
+    
+    <p>The Linux OS requires the following prerequisites:</p>
+    
+    <ul>
+        <li><strong>curl</strong> - Used to download the Sui and Rust installers from the internet.</li>
+        <li><strong>rust + cargo</strong> - Rust is the programming language Sui is built with, and Cargo helps build the project.</li>
+        <li><strong>git</strong> - Lets you download the Sui code from GitHub.</li>
+        <li><strong>cmake</strong> - Helps put the different parts of the code together when building.</li>
+        <li><strong>gcc</strong> - A basic tool that helps turn source code into programs.</li>
+        <li><strong>libssl-dev</strong> - Helps the CLI work securely over the internet (SSL/TLS support).</li>
+        <li><strong>libclang-dev</strong> - Needed by some parts of the code that work with C or C++ libraries.</li>
+        <li><strong>libpq-dev</strong> - Lets Sui talk to PostgreSQL databases (used in some setups).</li>
+        <li><strong>build-essential</strong> - A bundle of tools (like make and compilers) needed to build most software.</li>
+    </ul>
+    
+    <h3>1. cURL</h3>
+    <p>First, open up a terminal. We'll be using cURL to install most of the prerequisites. To check if you have cURL installed, run the command <code>curl</code> in your terminal. If you have cURL installed, the system will print <code>curl: try 'curl --help' or 'curl --manual' for more information</code>. Otherwise, you will see something like <code>curl command not found</code>. If you don't have cURL installed on your device, run the command below to install it:</p>
+    <pre>sudo apt install curl</pre>
+    
+    <h3>2. Rust and Cargo</h3>
+    <p>Sui requires Rust and Cargo (Rust's package manager). The suggested method to install Rust is with rustup using cURL. Run the following command in your terminal to install Rust and Cargo. If the terminal prompts with you installation options, choose the default option.</p>
+    <pre>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+    <p>After installing Rust, you might need to close and reopen your terminal. Sui uses the latest version of Cargo to build and manage dependencies. Use the following command to update Rust with rustup:</p>
+    <pre>rustup update</pre>
+    
+    <h3>3. Updating apt-get</h3>
+    <p>We use the APT package manager, so let's go ahead and make sure it's updated:</p>
+    <pre>sudo apt-get update</pre>
+    
+    <h3>4. Git</h3>
+    <p>Run the following command to install Git, including the Git CLI:</p>
+    <pre>sudo apt-get install git-all</pre>
+    
+    <h3>5. CMake</h3>
+    <p>Use the following command to install CMake:</p>
+    <pre>sudo apt-get install cmake</pre>
+    
+    <h3>6. gcc</h3>
+    <p>Use the following command to install the GNU Compiler Collection, gcc:</p>
+    <pre>sudo apt-get install gcc</pre>
+    
+    <h3>7. libssl-dev</h3>
+    <p>Use the following command to install libssl-dev. If the version of Linux you use doesn't support libssl-dev, find an equivalent package for it on the ROS Index.</p>
+    <pre>sudo apt-get install libssl-dev</pre>
+    <p>Also, if you have OpenSSL you might need to also install pkg-config:</p>
+    <pre>sudo apt-get install pkg-config</pre>
+    
+    <h3>8. libclang-dev</h3>
+    <p>Use the following command to install libclang-dev. If the version of Linux you use doesn't support libclang-dev, find an equivalent package for it on the ROS Index</p>
+    <pre>sudo apt-get install libclang-dev</pre>
+    
+    <h3>9. build-essential</h3>
+    <p>Use the following command to install build-essential:</p>
+    <pre>sudo apt-get install build-essential</pre>
+    
+    <p>Proceed to <strong><a href="#binaries">Installing Sui Binaries</a></strong></p>
+    
+    <hr>
+    
+    <h2 id="macos">macOS Setup</h2>
+    
+    <p>The macOS requires the following prerequisites:</p>
+    <ul>
+        <li>Brew</li>
+        <li>Rust and Cargo</li>
+        <li>cURL</li>
+        <li>CMake</li>
+        <li>Git CLI</li>
+    </ul>
+    
+    <h3>1. Brew</h3>
+    <p>Open up a terminal. macOS includes a version of cURL you can use to install Brew. We'll be using Brew to install other tools, including a newer version of cURL. Use the following command to install Brew:</p>
+    <pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+    
+    <h3>2. Rust and Cargo</h3>
+    <p>Run the following command in your terminal to install Rust and Cargo. If the terminal prompts with you installation options, choose the default option.</p>
+    <pre>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+    <p>After installing Rust, you might need to close and reopen your terminal. Sui uses the latest version of Cargo to build and manage dependencies. Use the following command to update Rust with rustup:</p>
+    <pre>rustup update stable</pre>
+    
+    <h3>3. cURL</h3>
+    <pre>brew install curl</pre>
+    
+    <h3>4. CMake</h3>
+    <p>Use the following command to install CMake:</p>
+    <pre>brew install cmake</pre>
+    
+    <h3>5. Git CLI</h3>
+    <p>Use the following command to install Git:</p>
+    <pre>brew install git</pre>
+    
+    <p>Proceed to <strong><a href="#binaries">Installing Sui Binaries</a></strong></p>
+    
+    <hr>
+    
+    <h2 id="windows">Windows Setup</h2>
+    
+    <p>On windows the process for installing Sui cli is quite tricky and there are various approaches to doing it. Some will require you to install the following prerequisites some will not. There are 3 methods for installing Sui CLI according to your preference and also expertise:</p>
+    <ul>
+        <li>WSL method</li>
+        <li>Chocolatey method</li>
+        <li>Manual method</li>
+    </ul>
+    
+    <div class="note">
+        <strong>NOTE:</strong> We recommend using the <strong>WSL (Windows Subsystem for Linux)</strong> method because it provides the most complete, developer-friendly environment for building, testing, and deploying Sui smart contracts. It closely mirrors the official Sui documentation, supports all necessary development tools, and gives you full control to use advanced commands like sui move test, run local validators, and work with open-source code — making it ideal for long-term learning and serious development.
+    </div>
+    
+    <p>However if you face challenges using that method you can use the <strong>Chocolatey method</strong> or the <strong>Manual method</strong></p>
+    
+    <h3>Installation Methods Breakdown</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Best For</th>
+                <th>Pros</th>
+                <th>Cons</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>WSL (Windows Subsystem for Linux)</strong></td>
+                <td>Developers building & testing smart contracts</td>
+                <td>✅ Matches Sui docs<br>✅ Full testing support<br>✅ Linux tools & flexibility</td>
+                <td>❌ Takes more time<br>❌ Requires Ubuntu setup</td>
+            </tr>
+            <tr>
+                <td><strong>Chocolatey</strong></td>
+                <td>Beginners who just want to try the CLI quickly</td>
+                <td>✅ Fast install<br>✅ Easy updates<br>✅ No coding knowledge needed</td>
+                <td>❌ Not dev-friendly<br>❌ Less control</td>
+            </tr>
+            <tr>
+                <td><strong>Manual Download</strong></td>
+                <td>Power users who want a quick setup without package managers</td>
+                <td>✅ Simple<br>✅ No build process<br>✅ Works offline after setup</td>
+                <td>❌ No auto-updates<br>❌ No testing tools<br>❌ Easy to misconfigure</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>Prerequisites Breakdown by Installation Method</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Tool</th>
+                <th>WSL (Recommended)</th>
+                <th>Chocolatey</th>
+                <th>Manual Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Rust & Cargo</strong></td>
+                <td>✅ Required</td>
+                <td>❌ Not needed</td>
+                <td>❌ Not needed</td>
+            </tr>
+            <tr>
+                <td><strong>Git CLI</strong></td>
+                <td>✅ Required</td>
+                <td>❌ Not needed</td>
+                <td>❌ Not needed</td>
+            </tr>
+            <tr>
+                <td><strong>CMake</strong></td>
+                <td>✅ Required</td>
+                <td>❌ Not needed</td>
+                <td>❌ Not needed</td>
+            </tr>
+            <tr>
+                <td><strong>C++ Build Tools</strong></td>
+                <td>✅ Required (build-essential)</td>
+                <td>❌ Not needed</td>
+                <td>❌ Not needed</td>
+            </tr>
+            <tr>
+                <td><strong>cURL</strong></td>
+                <td>✅ Required</td>
+                <td>✅ Used to install tools</td>
+                <td>⚠️ Optional</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="note">
+        <strong>Note:</strong> The WSL method builds Sui from source, so it needs all development tools. Chocolatey and Manual Download methods use prebuilt binaries — so Rust, Git, and compilers are not required.
+    </div>
+    
+    <p>If you decide to use the WSL method you can go ahead and proceed installing the following prerequisites:</p>
+    
+    <ul>
+        <li><strong>Rust + Cargo</strong> - Rust is the programming language Sui is written in. Cargo is Rust's tool for building and running the code. You need both to install and work with Sui CLI.</li>
+        <li><strong>cURL</strong> - A tool that lets your computer download files from the internet using the command line — it's used to fetch the Rust and Sui installers.</li>
+        <li><strong>Git CLI</strong> - Lets you download (clone) the Sui code from GitHub and track changes to your code.</li>
+        <li><strong>CMake</strong> - A helper tool that puts all the parts of the Sui program together during the build process.</li>
+        <li><strong>C++ Build Tools</strong> - A set of compilers and libraries from Microsoft needed to compile Rust and C++ code. Installed via Visual Studio Build Tools.</li>
+    </ul>
+    
+    <h3>1. Rust and Cargo</h3>
+    <p>The first thing we'll be installing is Rust. To do so, check out the information about using the Rust installer on the Rust website. The installer checks for C++ build tools and prompts you to install them if necessary. Select the option that best defines your environment and follow the instructions in the install wizard.</p>
+    <p>Sui uses the latest version of Cargo to build and manage dependencies. Use the following command to update Rust with rustup a tool you should have installed as part of the Rust installer.</p>
+    <pre>rustup update stable</pre>
+    
+    <h3>2. cURL</h3>
+    <p>Windows 11 ships with a Microsoft version of cURL already installed. If you are on windows 10 or want to use the curl project version instead, download and install it from the cURL website.</p>
+    
+    <h3>3. CMake</h3>
+    <p>Download and install CMake from the CMake website.</p>
+    
+    <hr>
+    
+    <h3>Chocolatey Method</h3>
+    <p>Chocolatey is a package manager for Windows that makes it easy to install and update software. It's a great option for beginners who want a quick and easy way to install Sui.</p>
+    <p>To install Chocolatey on Windows, you run powershell as an administrator and use the following command:</p>
+    <pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))</pre>
+    
+    <p>After installing Chocolatey, you can use the following command to install Sui:</p>
+    <pre>choco install sui</pre>
+    
+    <p>After that to check whether sui is installed correctly, open a new terminal and run the following command:</p>
+    <pre>sui --version</pre>
+    
+    <p>If you did it correctly you should see a similar output displaying the version of Sui you installed.</p>
+    
+    <hr>
+    
+    <h2>Virtual Environments Setup</h2>
+    
+    <p>Here we will explain just how to setup the virtual instances. We will explain on how to setup Github codespaces but the process is virtually the same even for gitpod. After that you can just refer to Linux setup to install the prerequisites and Installing Sui Binaries to install the binaries since these virtual instances run on linux so it will just be like working with a linux machine.</p>
+    
+    <h3>GitHub Codespaces</h3>
+    
+    <p>To get started with GitHub Codespaces, you need to have a GitHub account. If you don't have one, you can create one for free.</p>
+    
+    <h4>Step 1: Create a New GitHub Repository</h4>
+    <ol>
+        <li>Go to github.com and log in.</li>
+        <li>Click the "+" icon (top-right corner) → "New repository".</li>
+        <li>Fill in:
+            <ul>
+                <li>Repository name (e.g., sui-bootcamp)</li>
+                <li>Description (optional)</li>
+                <li>Choose Public or Private</li>
+            </ul>
+        </li>
+        <li>Check: ✅ Add a README file - this is very important since for us to initialize a codespace on this repository we will need it to have a file inside</li>
+        <li>Click "Create repository"</li>
+    </ol>
+    
+    <h4>Step 2: Open the Repository in a Codespace</h4>
+    <ol>
+        <li>On your repository page, click the green "&lt;&gt; Code" button.</li>
+        <li>Click the Codespaces tab.</li>
+        <li>Click "Create codespace on main" (or whatever branch you're using).</li>
+    </ol>
+    
+    <p>GitHub will now set up your development environment — including VS Code in the browser.</p>
+    
+    <h4>Step 3: Explore Your Codespace</h4>
+    <p>Once it loads:</p>
+    <ul>
+        <li>You'll see a VS Code-like interface in your browser.</li>
+        <li>The repo's files are on the left.</li>
+        <li>The terminal is already set up at the bottom.</li>
+    </ul>
+    
+    <h4>Step 4: Install Project Dependencies</h4>
+    <p>Now this will be like you have a linux computer so you can just head to the Linux setup and follow the instructions there to install the prerequisites and then proceed to the Installing the Binaries section to install the binaries.</p>
+    
+    <h4>Step 5: Run and Test Your Code</h4>
+    <p>You can write Move smart contracts, Rust code, or frontend apps directly in your Codespace. Use the terminal to run commands like:</p>
+    <pre>sui move test
+cargo build
+npm install</pre>
+    
+    <hr>
+    
+    <h2 id="binaries">Installing Sui Binaries</h2>
+    
+    <p>At this point, you should have installed the prerequisites required depending on the OS that your device uses. We're ready to proceed with installing Sui on our device!</p>
+    
+    <p>Run the following command in your terminal to install Sui binaries from the devnet branch:</p>
+    <pre>cargo install --locked --git https://github.com/MystenLabs/sui.git --branch devnet sui --features tracing</pre>
+    
+    <p>The <code>tracing</code> feature is important as it adds Move test coverage and debugger support in the Sui CLI. Unless it is enabled you will not be able to use these two features.</p>
+    
+    <div class="note">
+        <strong>NOTE:</strong> If you used the manual method or the Chocolatey method on Windows, you can skip this step, for you everything is already installed.
+    </div>
+    
+    <hr style="border-top: 3px solid #2E75B5; margin-top: 36pt;">
+    
+    <h1 id="wallet-setup">Setting Up the Sui Wallet</h1>
+    
+    <p>The Sui Wallet is your gateway to interacting with the Sui blockchain. You'll use it to store SUI tokens, mint NFTs, and connect to dApps you build during this bootcamp.</p>
+    
+    <hr>
+    
+    <h2>Step 1: Install the Sui Wallet Extension</h2>
+    <ol>
+        <li>Open your browser (Chrome or Brave recommended).</li>
+        <li>Visit the official Sui Wallet (Slush - A Sui wallet) extension page: 👉 <a href="https://chromewebstore.google.com/detail/opcgpfmipidbgpenhmajoajpbobppdil?utm_source=item-share-cb">Chrome Web Store</a></li>
+        <li>Click <strong>"Add to Chrome"</strong> or <strong>"Install Extension"</strong>.</li>
+        <li>Once installed, the wallet icon will appear in your browser toolbar.</li>
+    </ol>
+    
+    <hr>
+    
+    <h2><span class="emoji">🛠</span> Step 2: Create a New Wallet</h2>
+    <ol>
+        <li>Click the Sui Wallet icon in your browser.</li>
+        <li>Click <strong>"Create New Wallet"</strong>.</li>
+        <li>Set a <strong>strong password</strong> (you'll need this every time you open the wallet).</li>
+        <li><strong>Save your Recovery Phrase (Seed Phrase)</strong> somewhere safe — <strong>don't share it!</strong></li>
+    </ol>
+    
+    <div class="danger">
+        <strong>🚨 Warning:</strong> If you lose your recovery phrase, you won't be able to recover your wallet.
+    </div>
+    
+    <hr>
+    
+    <h2>Step 3: Switch Networks</h2>
+    <ol>
+        <li>Open your Sui Wallet.</li>
+        <li>In the bottom-left corner, click the user profile icon and click on <strong>"Network"</strong>.</li>
+        <li>Select <strong>"Testnet"</strong> or your desired network.</li>
+        <li>Your wallet is now ready to interact with testnet apps.</li>
+    </ol>
+    
+    <hr>
+    
+    <h2>Step 4: Get Free Test SUI Tokens</h2>
+    <ol>
+        <li>In the wallet, click <strong>"Request SUI Tokens from Faucet"</strong>.</li>
+        <li>A transaction will be submitted to the testnet faucet.</li>
+        <li>Wait a few seconds — you should see some SUI tokens appear in your balance.</li>
+    </ol>
+    
+    <hr>
+    
+    <p><strong>You can now:</strong></p>
+    <ul>
+        <li>Connect the wallet to dApps</li>
+        <li>Sign transactions</li>
+        <li>View assets like tokens and NFTs</li>
+    </ul>
+    
+    <hr>
+    
+    <h2>Tips</h2>
+    <ul>
+        <li><strong>Back up your recovery phrase</strong> offline.</li>
+        <li>You can switch between <strong>Testnet</strong>, <strong>Devnet</strong>, and <strong>Mainnet</strong> in the network dropdown.</li>
+        <li>You can import existing wallets using "Import Wallet" on the first screen.</li>
+    </ul>
+    
+    <hr style="border-top: 3px solid #2E75B5; margin-top: 36pt;">
+    
+    <h1 id="testnet-tokens"><span class="emoji">💧</span> How to Request SUI Testnet & Devnet Tokens</h1>
+    
+    <p>If you're developing on the Sui blockchain, you'll need test tokens to deploy and interact with smart contracts. There are multiple ways to get test tokens on Sui:</p>
+    
+    <ul>
+        <li>Request tokens from the official Sui Web Faucet</li>
+        <li>Request tokens from the Sui Discord Bot</li>
+        <li>Request test tokens through cURL requests</li>
+        <li>Request test tokens through TypeScript SDK</li>
+    </ul>
+    
+    <hr>
+    
+    <h2><span class="emoji">✅</span> 1. Request via Sui Web Faucet</h2>
+    
+    <p>The Sui Foundation provides an official web faucet for both Testnet and Devnet. To switch you just switch to your preferred network using the dropdown menu in the top right corner of the page.</p>
+    
+    <h3>Links:</h3>
+    <ul>
+        <li><strong>Testnet</strong>: <a href="https://faucet.sui.io/?network=testnet&address=0xd8133d487f2bd59baf4906ba1b76e29504dd8ab7900a2b1ff4d489eab88d59b1">https://faucet.testnet.sui.io/gas</a></li>
+    </ul>
+    
+    <h3><span class="emoji">📝</span> Steps:</h3>
+    <ol>
+        <li>Open the appropriate faucet URL.</li>
+        <li>Paste your Sui wallet address.</li>
+        <li>Click <strong>"Request"</strong> to receive tokens.</li>
+        <li>Tokens will be sent to your wallet in a few seconds.</li>
+    </ol>
+    
+    <hr>
+    
+    <h2>2. Request via Discord Bot</h2>
+    
+    <p>Sui's Discord server offers a faucet bot for Testnet & Devnet tokens.</p>
+    
+    <h3><span class="emoji">📝</span> Steps:</h3>
+    <ol>
+        <li>Join the official Sui Discord <a href="https://discord.com/invite/sui">here</a></li>
+        <li>Go to the <code>#testnet-faucet</code> or <code>#devnet-faucet</code> channel.</li>
+        <li>Use the command:</li>
+    </ol>
+    <pre>!faucet &lt;your-address&gt;</pre>
+    
+    <p>For example to request from this wallet, <code>0xd8133d487f2bd59baf4906ba1b76e29504dd8ab7900a2b1ff4d489eab88d59b1</code> this is how the command would look like:</p>
+    <pre>!faucet 0xd8133d487f2bd59baf4906ba1b76e29504dd8ab7900a2b1ff4d489eab88d59b1</pre>
+    
+    <ol start="4">
+        <li>Tokens will be sent to your wallet in a few seconds.</li>
+    </ol>
+    
+    <hr>
+    
+    <h2>3. Request via cURL</h2>
+    
+    <p>Use the following cURL command to request tokens directly from the faucet server. In this case we'll be requesting devnet tokens.</p>
+    
+    <pre>curl --location --request POST 'https://faucet.devnet.sui.io/v2/gas' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "FixedAmountRequest": {
+        "recipient": "&lt;YOUR SUI ADDRESS&gt;"
+    }
+}'</pre>
+    
+    <p>For testnet you just proceed to replace <code>devnet</code> with <code>testnet</code> in the url to look like this:</p>
+    
+    <pre>curl --location --request POST 'https://faucet.testnet.sui.io/v2/gas' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "FixedAmountRequest": {
+        "recipient": "&lt;YOUR SUI ADDRESS&gt;"
+    }
+}'</pre>
+    
+    <p>The output should display transaction details confirming your tokens have been sent.</p>
+    
+    <hr>
+    
+    <div style="text-align: center; margin-top: 36pt; padding: 24pt; background: #F8F8F8; border-radius: 8px;">
+        <h2 style="color: #2E75B5; margin-bottom: 12pt;">🎉 Congratulations!</h2>
+        <p style="font-size: 12pt; margin: 0;">You've successfully set up your Sui development environment.</p>
+        <p style="font-size: 12pt; margin: 6pt 0 0 0;">You're now ready to start building on Sui!</p>
+    </div>
+    
+</body>
+</html>

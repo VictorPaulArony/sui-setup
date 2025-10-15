@@ -5,173 +5,703 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sui CLI Setup Guide</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Calibri', 'Arial', sans-serif;
-            line-height: 1.6;
-            max-width: 8.5in;
-            margin: 0 auto;
-            padding: 1in;
-            background: white;
-            color: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #334155;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+            padding: 2.5rem 2rem;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.03);
+            z-index: 100;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .container {
+            margin-left: 300px;
+            flex: 1;
+            background: #ffffff;
+            padding: 4rem 5rem;
+            max-width: 1400px;
+            animation: fadeIn 0.6s ease-in;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.02);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         h1 {
-            font-size: 24pt;
-            font-weight: bold;
-            color: #2E75B5;
-            margin-top: 0;
-            margin-bottom: 12pt;
-            border-bottom: 2px solid #2E75B5;
-            padding-bottom: 6pt;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0 0 2rem 0;
+            letter-spacing: -1px;
+            position: relative;
+            padding-bottom: 1.5rem;
+            line-height: 1.2;
         }
-        h2 {
-            font-size: 18pt;
-            font-weight: bold;
-            color: #2E75B5;
-            margin-top: 18pt;
-            margin-bottom: 10pt;
-        }
-        h3 {
-            font-size: 14pt;
-            font-weight: bold;
-            color: #4472C4;
-            margin-top: 14pt;
-            margin-bottom: 8pt;
-        }
-        h4 {
-            font-size: 12pt;
-            font-weight: bold;
-            color: #4472C4;
-            margin-top: 12pt;
-            margin-bottom: 6pt;
-        }
-        p {
-            margin: 6pt 0;
-            text-align: justify;
-        }
-        ul, ol {
-            margin: 6pt 0;
-            padding-left: 30pt;
-        }
-        li {
-            margin: 3pt 0;
-        }
-        code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background: #F2F2F2;
-            padding: 2pt 4pt;
-            border: 1px solid #D4D4D4;
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 5px;
+            background: #3b82f6;
             border-radius: 3px;
-            font-size: 10pt;
         }
-        pre {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background: #F8F8F8;
-            padding: 12pt;
-            border: 1px solid #D4D4D4;
-            border-left: 4px solid #2E75B5;
-            overflow-x: auto;
-            margin: 12pt 0;
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            line-height: 1.3;
+        }
+
+        h2::before {
+            content: '';
+            width: 8px;
+            height: 36px;
+            background: #3b82f6;
             border-radius: 4px;
-            font-size: 10pt;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #334155;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
             line-height: 1.4;
         }
+
+        h4 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        p {
+            margin: 1.5rem 0;
+            font-size: 1.0625rem;
+            line-height: 1.9;
+            color: #475569;
+            max-width: 75ch;
+        }
+
+        ul, ol {
+            margin: 1.5rem 0;
+            padding-left: 2.5rem;
+        }
+
+        li {
+            margin: 1rem 0;
+            color: #475569;
+            line-height: 1.8;
+            font-size: 1.0625rem;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 0.75rem;
+        }
+
+        ul li::marker {
+            color: #3b82f6;
+            font-size: 1.2em;
+        }
+
+        ol li::marker {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        code {
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: #f1f5f9;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            color: #1e40af;
+            font-weight: 500;
+        }
+
+        pre {
+            font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 2rem;
+            border: none;
+            border-left: 5px solid #3b82f6;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        pre:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font-weight: normal;
+        }
         table {
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             width: 100%;
-            margin: 12pt 0;
+            margin: 2.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
         }
+
         th, td {
-            border: 1px solid #D4D4D4;
-            padding: 8pt;
+            padding: 1.25rem 1.5rem;
             text-align: left;
+            border: none;
         }
+
         th {
-            background: #2E75B5;
+            background: #3b82f6;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
         }
-        tr:nth-child(even) {
-            background: #F2F2F2;
+
+        tbody tr {
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tbody tr:hover {
+            background: #f1f5f9;
+        }
+
+        td {
+            color: #475569;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 1rem;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
         }
         .warning {
-            background: #FFF4CE;
-            border-left: 4px solid #FFB900;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: #fffbeb;
+            border-left: 6px solid #f59e0b;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
+            animation: slideIn 0.4s ease;
+            border: 1px solid #fde68a;
         }
+
+        .warning::before {
+            content: '⚠️';
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .note {
-            background: #E7F3FF;
-            border-left: 4px solid #2E75B5;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: #eff6ff;
+            border-left: 6px solid #3b82f6;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+            animation: slideIn 0.4s ease;
+            border: 1px solid #bfdbfe;
         }
+
+        .note::before {
+            content: 'ℹ️';
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .danger {
-            background: #FFE6E6;
-            border-left: 4px solid #D83B01;
-            padding: 12pt;
-            margin: 12pt 0;
+            background: #fef2f2;
+            border-left: 6px solid #ef4444;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.08);
+            animation: slideIn 0.4s ease;
+            border: 1px solid #fecaca;
         }
-        .menu {
-            background: #F8F8F8;
-            border: 2px solid #2E75B5;
-            padding: 16pt;
-            margin: 16pt 0;
-            border-radius: 6px;
+
+        .danger::before {
+            content: '🚨';
+            font-size: 1.75rem;
+            margin-right: 1rem;
+            display: inline-block;
+            vertical-align: middle;
         }
-        .menu h2 {
-            margin-top: 0;
-            font-size: 16pt;
+
+        .warning strong, .note strong, .danger strong {
+            font-weight: 700;
+            font-size: 1.0625rem;
         }
-        .menu ul {
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .sidebar-title {
+            font-size: 1.625rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 3px solid #e2e8f0;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.8125rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 1rem;
+            padding-left: 0.75rem;
+        }
+
+        .nav-list {
             list-style: none;
             padding-left: 0;
+            margin: 0;
         }
-        .menu li {
-            margin: 8pt 0;
-            padding-left: 20pt;
-            position: relative;
+
+        .nav-list li {
+            margin: 0.25rem 0;
         }
-        .menu li:before {
-            content: "📄";
-            position: absolute;
-            left: 0;
+
+        .nav-list a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #475569;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            font-size: 0.9375rem;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .nav-list a::before {
+            content: '→';
+            margin-right: 0.75rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.25s ease;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .nav-list a:hover {
+            background: #f1f5f9;
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+            padding-left: 1.25rem;
+        }
+
+        .nav-list a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-list a.active {
+            background: #eff6ff;
+            color: #3b82f6;
+            font-weight: 600;
+            border-left-color: #3b82f6;
+            padding-left: 1.25rem;
+        }
+
+        .nav-list a.active::before {
+            opacity: 1;
+            transform: translateX(0);
         }
         .button {
-            background: #2E75B5;
+            background: #3b82f6;
             color: white;
-            padding: 8pt 16pt;
+            padding: 0.75rem 1.75rem;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 8px;
             display: inline-block;
-            margin: 6pt 0;
+            margin: 1rem 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
         }
+
+        .button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
         hr {
             border: none;
-            border-top: 1px solid #D4D4D4;
-            margin: 18pt 0;
+            border-top: 2px solid #e2e8f0;
+            margin: 4rem 0;
         }
+
         a {
-            color: #2E75B5;
-            text-decoration: underline;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
         }
+
+        a:hover {
+            color: #2563eb;
+        }
+
+        .container a:not(.nav-list a) {
+            text-decoration: underline;
+            text-decoration-color: #93c5fd;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+
+        .container a:not(.nav-list a):hover {
+            text-decoration-color: #3b82f6;
+        }
+
         .emoji {
-            font-size: 14pt;
+            font-size: 1.5rem;
+        }
+
+        strong {
+            color: #1e293b;
+            font-weight: 700;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Back to top button styling */
+        .back-to-top {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            background: #3b82f6;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            font-size: 1.75rem;
+            border: 3px solid white;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            background: #2563eb;
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.35);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 200;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.875rem 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 8px 0 32px rgba(0,0,0,0.1);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .container {
+                margin-left: 0;
+                padding: 3rem 2.5rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            body.menu-open .sidebar {
+                transform: translateX(0);
+            }
+
+            body.menu-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.6);
+                z-index: 99;
+                backdrop-filter: blur(4px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2.5rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+                margin-top: 4rem;
+            }
+
+            h2 {
+                font-size: 1.875rem;
+                margin-top: 3rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            h4 {
+                font-size: 1.25rem;
+            }
+
+            p, li {
+                font-size: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 1rem;
+            }
+
+            pre {
+                font-size: 0.875rem;
+                padding: 1.5rem;
+            }
+
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+
+            h1 {
+                font-size: 1.875rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            pre {
+                padding: 1.25rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile menu toggle -->
+    <button class="mobile-menu-toggle" id="menuToggle">
+        ☰ Menu
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">📚 Sui Setup Guide</div>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Getting Started</div>
+            <ul class="nav-list">
+                <li><a href="#cli-setup">Sui CLI Setup</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Choose Your OS</div>
+            <ul class="nav-list">
+                <li><a href="#linux">🐧 Linux Setup</a></li>
+                <li><a href="#macos">🍎 macOS Setup</a></li>
+                <li><a href="#windows">🪟 Windows Setup</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Installation</div>
+            <ul class="nav-list">
+                <li><a href="#binaries">Installing Binaries</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Post-Installation</div>
+            <ul class="nav-list">
+                <li><a href="#wallet-setup">Wallet Setup</a></li>
+                <li><a href="#testnet-tokens">Get Test Tokens</a></li>
+            </ul>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Frontend Development</div>
+            <ul class="nav-list">
+                <li><a href="#frontend-setup">Frontend Setup</a></li>
+                <li><a href="#react-vite">React + Vite</a></li>
+                <li><a href="#nextjs">Next.js</a></li>
+                <li><a href="#react-native">React Native</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="container">
     <h1>Sui Development Setup Guide</h1>
-    
-    <div class="menu">
-        <h2>📋 Table of Contents</h2>
-        <ul>
-            <li><a href="#cli-setup"><strong>Sui CLI Setup</strong></a> - Install Sui CLI on your local machine</li>
-            <li><a href="#wallet-setup"><strong>Setting Up the Sui Wallet</strong></a> - Install and configure your Sui browser wallet</li>
-            <li><a href="#testnet-tokens"><strong>How to Request SUI Testnet & Devnet Tokens</strong></a> - Get free test tokens for development</li>
-        </ul>
-    </div>
-    
-    <hr style="border-top: 3px solid #2E75B5;">
     
     <h1 id="cli-setup">Sui CLI Setup</h1>
     
@@ -645,11 +1175,473 @@ npm install</pre>
     
     <hr>
     
-    <div style="text-align: center; margin-top: 36pt; padding: 24pt; background: #F8F8F8; border-radius: 8px;">
-        <h2 style="color: #2E75B5; margin-bottom: 12pt;">🎉 Congratulations!</h2>
-        <p style="font-size: 12pt; margin: 0;">You've successfully set up your Sui development environment.</p>
-        <p style="font-size: 12pt; margin: 6pt 0 0 0;">You're now ready to start building on Sui!</p>
+    <hr style="border-top: 3px solid #3b82f6; margin-top: 5rem;">
+
+    <h1 id="frontend-setup">Frontend Development Setup</h1>
+
+    <p>Now that you have Sui CLI and your wallet set up, let's configure your frontend development environment. This section will guide you through setting up React-based projects with TypeScript and Tailwind CSS for building Sui dApps.</p>
+
+    <div class="note">
+        <strong>Prerequisites:</strong> Make sure you have Node.js (version 16 or higher) and npm/yarn installed on your system. You can verify by running <code>node --version</code> and <code>npm --version</code>.
     </div>
-    
+
+    <hr>
+
+    <h2 id="react-vite">React + Vite + TypeScript + Tailwind CSS</h2>
+
+    <p>Vite is a modern, fast build tool perfect for React development. This setup includes TypeScript for type safety and Tailwind CSS for styling.</p>
+
+    <h3>Step 1: Create a New Vite + React + TypeScript Project</h3>
+
+    <p>Run the following command to create a new React project with Vite and TypeScript:</p>
+
+    <pre>npm create vite@latest my-sui-dapp -- --template react-ts</pre>
+
+    <p>Navigate into your project directory:</p>
+
+    <pre>cd my-sui-dapp</pre>
+
+    <h3>Step 2: Install Dependencies</h3>
+
+    <p>Install the base dependencies:</p>
+
+    <pre>npm install</pre>
+
+    <h3>Step 3: Install Sui SDK and Dependencies</h3>
+
+    <p>Install the Mysten Sui TypeScript SDK and wallet adapter:</p>
+
+    <pre>npm install @mysten/sui.js @mysten/dapp-kit @mysten/wallet-standard @tanstack/react-query</pre>
+
+    <h3>Step 4: Install and Configure Tailwind CSS</h3>
+
+    <p>Install Tailwind CSS and its peer dependencies:</p>
+
+    <pre>npm install -D tailwindcss postcss autoprefixer</pre>
+
+    <p>Initialize Tailwind CSS configuration:</p>
+
+    <pre>npx tailwindcss init -p</pre>
+
+    <p>Update your <code>tailwind.config.js</code> file:</p>
+
+    <pre>/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</pre>
+
+    <p>Add Tailwind directives to your <code>src/index.css</code> file:</p>
+
+    <pre>@tailwind base;
+@tailwind components;
+@tailwind utilities;</pre>
+
+    <h3>Step 5: Set Up Sui dApp Kit</h3>
+
+    <p>Update your <code>src/main.tsx</code> to include the Sui dApp Kit providers:</p>
+
+    <pre>import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit'
+import { getFullnodeUrl } from '@mysten/sui.js/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+const networks = {
+  devnet: { url: getFullnodeUrl('devnet') },
+  testnet: { url: getFullnodeUrl('testnet') },
+  mainnet: { url: getFullnodeUrl('mainnet') },
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  &lt;React.StrictMode&gt;
+    &lt;QueryClientProvider client={queryClient}&gt;
+      &lt;SuiClientProvider networks={networks} defaultNetwork="testnet"&gt;
+        &lt;WalletProvider&gt;
+          &lt;App /&gt;
+        &lt;/WalletProvider&gt;
+      &lt;/SuiClientProvider&gt;
+    &lt;/QueryClientProvider&gt;
+  &lt;/React.StrictMode&gt;,
+)</pre>
+
+    <h3>Step 6: Import dApp Kit Styles</h3>
+
+    <p>Add the dApp Kit CSS to your <code>src/index.css</code> at the top:</p>
+
+    <pre>@import '@mysten/dapp-kit/dist/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;</pre>
+
+    <h3>Step 7: Run Your Development Server</h3>
+
+    <p>Start the development server:</p>
+
+    <pre>npm run dev</pre>
+
+    <p>Your React + Vite + TypeScript + Tailwind CSS project is now ready! Open your browser at <code>http://localhost:5173</code></p>
+
+    <hr>
+
+    <h2 id="nextjs">Next.js + TypeScript + Tailwind CSS</h2>
+
+    <p>Next.js is a powerful React framework with server-side rendering and excellent developer experience.</p>
+
+    <h3>Step 1: Create a Next.js Project</h3>
+
+    <p>Create a new Next.js app with TypeScript and Tailwind CSS:</p>
+
+    <pre>npx create-next-app@latest my-sui-nextjs-dapp --typescript --tailwind --app --no-src-dir --import-alias "@/*"</pre>
+
+    <p>Navigate to your project:</p>
+
+    <pre>cd my-sui-nextjs-dapp</pre>
+
+    <h3>Step 2: Install Sui Dependencies</h3>
+
+    <p>Install the Sui SDK and wallet adapter:</p>
+
+    <pre>npm install @mysten/sui.js @mysten/dapp-kit @mysten/wallet-standard @tanstack/react-query</pre>
+
+    <h3>Step 3: Create Providers Component</h3>
+
+    <p>Since Next.js 13+ uses the App Router, create a client component for providers. Create <code>app/providers.tsx</code>:</p>
+
+    <pre>'use client'
+
+import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit'
+import { getFullnodeUrl } from '@mysten/sui.js/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactNode } from 'react'
+
+const queryClient = new QueryClient()
+
+const networks = {
+  devnet: { url: getFullnodeUrl('devnet') },
+  testnet: { url: getFullnodeUrl('testnet') },
+  mainnet: { url: getFullnodeUrl('mainnet') },
+}
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    &lt;QueryClientProvider client={queryClient}&gt;
+      &lt;SuiClientProvider networks={networks} defaultNetwork="testnet"&gt;
+        &lt;WalletProvider&gt;
+          {children}
+        &lt;/WalletProvider&gt;
+      &lt;/SuiClientProvider&gt;
+    &lt;/QueryClientProvider&gt;
+  )
+}</pre>
+
+    <h3>Step 4: Update Root Layout</h3>
+
+    <p>Update your <code>app/layout.tsx</code>:</p>
+
+    <pre>import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Providers } from './providers'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'My Sui dApp',
+  description: 'Built with Next.js and Sui',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body className={inter.className}&gt;
+        &lt;Providers&gt;
+          {children}
+        &lt;/Providers&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</pre>
+
+    <h3>Step 5: Add dApp Kit Styles</h3>
+
+    <p>Import dApp Kit CSS in your <code>app/globals.css</code>:</p>
+
+    <pre>@import '@mysten/dapp-kit/dist/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;</pre>
+
+    <h3>Step 6: Run Development Server</h3>
+
+    <p>Start your Next.js development server:</p>
+
+    <pre>npm run dev</pre>
+
+    <p>Open <code>http://localhost:3000</code> in your browser.</p>
+
+    <hr>
+
+    <h2 id="react-native">React Native + TypeScript + Sui</h2>
+
+    <p>Build mobile dApps for iOS and Android using React Native with Sui integration.</p>
+
+    <h3>Step 1: Create React Native Project</h3>
+
+    <p>Create a new React Native project with TypeScript:</p>
+
+    <pre>npx react-native@latest init MySuiMobileApp --template react-native-template-typescript</pre>
+
+    <p>Navigate to your project:</p>
+
+    <pre>cd MySuiMobileApp</pre>
+
+    <h3>Step 2: Install Sui SDK</h3>
+
+    <p>Install Sui SDK and required dependencies:</p>
+
+    <pre>npm install @mysten/sui.js @react-native-async-storage/async-storage</pre>
+
+    <h3>Step 3: Install Polyfills</h3>
+
+    <p>React Native requires polyfills for certain Node.js modules. Install them:</p>
+
+    <pre>npm install react-native-get-random-values react-native-url-polyfill</pre>
+
+    <h3>Step 4: Configure Polyfills</h3>
+
+    <p>Add polyfills at the top of your <code>index.js</code> file (before any other imports):</p>
+
+    <pre>import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
+
+import { AppRegistry } from 'react-native';
+import App from './App';
+import { name as appName } from './app.json';
+
+AppRegistry.registerComponent(appName, () => App);</pre>
+
+    <h3>Step 5: Install NativeWind (Tailwind for React Native) - Optional</h3>
+
+    <p>If you want Tailwind-like styling in React Native:</p>
+
+    <pre>npm install nativewind
+npm install --save-dev tailwindcss</pre>
+
+    <p>Initialize Tailwind:</p>
+
+    <pre>npx tailwindcss init</pre>
+
+    <p>Update <code>tailwind.config.js</code>:</p>
+
+    <pre>/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./App.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</pre>
+
+    <p>Add to your <code>babel.config.js</code>:</p>
+
+    <pre>module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['nativewind/babel'],
+};</pre>
+
+    <h3>Step 6: Run on iOS or Android</h3>
+
+    <p>For iOS (macOS only):</p>
+
+    <pre>npx pod-install
+npm run ios</pre>
+
+    <p>For Android:</p>
+
+    <pre>npm run android</pre>
+
+    <div class="warning">
+        <strong>Note:</strong> For React Native, you'll need to set up either Xcode (for iOS) or Android Studio (for Android). Mobile wallet integration requires additional setup with deep linking and wallet connect protocols.
+    </div>
+
+    <hr>
+
+    <h2>Additional Resources</h2>
+
+    <ul>
+        <li><a href="https://sdk.mystenlabs.com/dapp-kit" target="_blank">Sui dApp Kit Documentation</a></li>
+        <li><a href="https://docs.sui.io/guides/developer/first-app" target="_blank">Build Your First Sui dApp</a></li>
+        <li><a href="https://vitejs.dev/" target="_blank">Vite Documentation</a></li>
+        <li><a href="https://nextjs.org/docs" target="_blank">Next.js Documentation</a></li>
+        <li><a href="https://reactnative.dev/" target="_blank">React Native Documentation</a></li>
+        <li><a href="https://tailwindcss.com/" target="_blank">Tailwind CSS Documentation</a></li>
+    </ul>
+
+    <hr>
+
+    <div style="text-align: center; margin-top: 5rem; padding: 3rem; background: #ecfdf5; border-radius: 16px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12); border: 2px solid #a7f3d0;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+        <h2 style="color: #059669; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 700;">Congratulations!</h2>
+        <p style="font-size: 1.125rem; margin: 0 auto 1rem auto; color: #047857; max-width: 600px; line-height: 1.8;">You've successfully set up your Sui development environment with frontend frameworks.</p>
+        <p style="font-size: 1.125rem; margin: 0 auto; color: #047857; max-width: 600px; line-height: 1.8; font-weight: 600;">You're now ready to start building amazing Sui dApps!</p>
+    </div>
+
+    </div> <!-- End of container -->
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop" title="Back to top">
+        ↑
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            document.body.classList.toggle('menu-open');
+            sidebar.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                document.body.classList.remove('menu-open');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('.nav-list a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('menu-open');
+                sidebar.classList.remove('active');
+            });
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('h1[id], h2[id]');
+        const navLinksAll = document.querySelectorAll('.nav-list a');
+
+        function highlightActiveSection() {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinksAll.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+
+        // Add copy button to code blocks
+        document.querySelectorAll('pre').forEach((pre) => {
+            const button = document.createElement('button');
+            button.innerText = '📋 Copy';
+            button.style.cssText = `
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 0.4rem 0.8rem;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                transition: all 0.2s ease;
+            `;
+
+            button.addEventListener('mouseenter', () => {
+                button.style.background = 'rgba(255, 255, 255, 0.2)';
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+            });
+
+            button.addEventListener('click', () => {
+                const code = pre.innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerText = '✓ Copied!';
+                    setTimeout(() => {
+                        button.innerText = '📋 Copy';
+                    }, 2000);
+                });
+            });
+
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+        });
+
+        // Add smooth scroll animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('h2, h3, .warning, .note, .danger, table').forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
